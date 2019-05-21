@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Courses</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet"/>
+</head>
+<body onload="CreateCourses()">
+    
+    <div class="container">
+        <div class = "jumbotron" style="text-align: center">
+            
+                    <h1 >All Courses</h1>
+
+            
+        </div>
+        <div class = "row">
+
+            
+        </div>
+
+
+    </div>
+
+    <script>
+
+     var javaCourse, Angular, Node, Redux, dotNet;
+     var courses = new Array();
+     var rowElement = document.querySelector(".row");
+
+
+     function Course(name, imageUrl, likes, duration){ // This is a constructor
+         this.name = name || "Java";
+         this.image = imageUrl || "https://cdn.iconscout.com/icon/free/png-256/java-23-225999.png";
+         this.likes = likes || 50;
+         this.duration = duration || 2;
+     }
+
+     function displayCourses(){
+         for(var course of courses){
+
+            // Set the main div
+             var divEle = document.createElement("div");
+             divEle.style.margin = "5px";
+             divEle.style.border = "2px solid black";
+             divEle.style.borderRadius = "5px";
+            
+
+             // Div for display course name
+             var courseNameDiv = document.createElement("div");
+             courseNameDiv.innerHTML = course.name
+             courseNameDiv.style.fontWeight = "bold";
+             courseNameDiv.style.fontSize = "25px";
+
+             //course image
+             var img = document.createElement("img");
+             img.src = course.image;
+             img.style.width = "250px";
+             img.style.height = "200px";
+
+             //likes image and count
+             var likesDiv = document.createElement("div");
+             likesDiv.id = "likes";
+             var likesimage = document.createElement("img");
+             var likesNumber = document.createElement("p");
+             likesNumber.innerText = course.likes;
+             likesNumber.style.fontWeight = "bold";
+             
+             
+             likesimage.src = "http://pngimg.com/uploads/like/like_PNG14.png";
+             likesimage.style.width = "45px";
+             likesimage.style.height = "30px";
+             likesimage.addEventListener("click", incrementLikes.bind(this,course));
+             
+
+             likesDiv.appendChild(likesimage);
+             likesDiv.appendChild(likesNumber);
+
+             // Duration of course
+             var duration = document.createElement("div");
+             duration.innerHTML = "Duration: "+course.duration + "days";
+             duration.style.fontWeight = "bold";
+
+             //Delete icon and listener
+             var deleteIcon =  document.createElement("img");
+             deleteIcon.src = "http://images.rdnation.com/leagues/2014/8/6/DELETE-logo-130518047895396250.jpg";
+             deleteIcon.style.width = "40px";
+             deleteIcon.style.height = "40px";
+             deleteIcon.addEventListener("click", deleteCourse);
+
+             // Add all the divs to the main grid div
+             divEle.className = "col col-lg-3";
+             divEle.appendChild(courseNameDiv);
+             divEle.appendChild(img);
+             divEle.appendChild(document.createElement("br"));
+             divEle.appendChild(likesimage);
+             divEle.appendChild(likesNumber);
+             divEle.appendChild(deleteIcon);
+             divEle.appendChild(duration);
+             rowElement.appendChild(divEle);
+         }
+     }
+
+     
+
+     function CreateCourses(){
+       addCourses();
+       displayCourses();
+     }
+
+     function addCourses(){
+        javaCourse = new Course("Java");
+        Angular = new Course("Angular", "https://angular-school-deploy.s3.amazonaws.com/images/the_A_gif-1c1149415fb6c5d83c38989f169d7630.gif", 100,3);
+        Node = new Course("Node", "https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/256/full/nodejslogo.png",200,5);
+        Redux = new Course("Redux","https://cdn-images-1.medium.com/max/1200/0*U2DmhXYumRyXH6X1.png",300,3);
+        dotNet = new Course(".Net","https://www.cloudmqtt.com/images/dotnet.png",250,2);
+        courses.push(javaCourse);
+        courses.push(Angular);
+        courses.push(Node);
+        courses.push(Redux);
+        courses.push(dotNet);
+     }
+      function deleteCourse(){
+            var rowDiv = document.querySelector(".row");
+            rowDiv.removeChild(event.target.parentNode);
+      }
+     function incrementLikes(course){
+         course.likes = parseInt(course.likes) + 1;
+         event.target.nextElementSibling.innerHTML = course.likes;
+
+        
+     }
+    </script>
+
+
+</body>
+</html>

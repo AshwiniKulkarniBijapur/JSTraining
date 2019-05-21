@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Courses</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet"/>
+</head>
+<body onload="CreateCourses()">
+    
+    <div class="container">
+        <div  style="text-align: center">
+            <h1 >All Courses</h1>
+            <div id="AddNewCourse">
+                <form id="AddNewCourse" action=>
+
+                </form>
+
+            </div>
+         </div>
+        <div class = "row"></div>
+    </div>
+
+    <script>
+
+     var javaCourse, Angular, Node, Redux, dotNet;
+     var courses = new Array();
+     var rowElement = document.querySelector(".row");
+
+     function CreateCourses(){
+        addCoursesAndDisplay();
+       
+     }
+
+    function addCoursesAndDisplay(){
+         //Ajax request to get the course details
+         var XMLHttpObj = new XMLHttpRequest(); 
+         //XMLHttpObj.open("GET","https://api.myjson.com/bins/wxmbe"); // JSON data hosted here myjson.com 
+         XMLHttpObj.open("GET","http://127.0.0.1:3000/Courses");
+         XMLHttpObj.send();
+         XMLHttpObj.onreadystatechange =  function(){ // readyState gives state of async call (1-4) numeric states for the values. refer MDN for more details
+            if(XMLHttpObj.readyState == 4 && XMLHttpObj.status == 200){
+              courses = JSON.parse(XMLHttpObj.responseText);
+              console.log(courses);
+              displayCourses();
+            }
+         }
+    }
+
+    
+     
+      function deleteCourse(){
+            var rowDiv = document.querySelector(".row");
+            rowDiv.removeChild(event.target.parentNode);
+      }
+     function incrementLikes(course){
+         course.likes = parseInt(course.likes) + 1;
+         event.target.nextElementSibling.innerHTML = course.likes;
+
+        
+     }
+
+    function displayCourses(){
+        for(var course of courses){
+
+            // Set the main div
+             var divEle = document.createElement("div");
+             divEle.style.margin = "5px";
+             divEle.style.border = "2px solid black";
+             divEle.style.borderRadius = "5px";
+            
+
+             // Div for display course name
+             var courseNameDiv = document.createElement("div");
+             courseNameDiv.innerHTML = course.name
+             courseNameDiv.style.fontWeight = "bold";
+             courseNameDiv.style.fontSize = "25px";
+
+             //course image
+             var img = document.createElement("img");
+             img.src = course.image;
+             img.style.width = "150px";
+             img.style.height = "100px";
+
+             //likes image and count
+             var likesDiv = document.createElement("div");
+             likesDiv.id = "likes";
+             var likesimage = document.createElement("img");
+             var likesNumber = document.createElement("p");
+             likesNumber.innerText = course.likes;
+             likesNumber.style.fontWeight = "bold";
+             
+             
+             likesimage.src = "http://pngimg.com/uploads/like/like_PNG14.png";
+             likesimage.style.width = "45px";
+             likesimage.style.height = "30px";
+             likesimage.addEventListener("click", incrementLikes.bind(this,course));
+             
+
+             likesDiv.appendChild(likesimage);
+             likesDiv.appendChild(likesNumber);
+
+             // Duration of course
+             var duration = document.createElement("div");
+             duration.innerHTML = "Duration: "+course.duration + "days";
+             duration.style.fontWeight = "bold";
+
+             //Delete icon and listener
+             var deleteIcon =  document.createElement("img");
+             deleteIcon.src = "http://images.rdnation.com/leagues/2014/8/6/DELETE-logo-130518047895396250.jpg";
+             deleteIcon.style.width = "40px";
+             deleteIcon.style.height = "40px";
+             deleteIcon.addEventListener("click", deleteCourse);
+
+             // Add all the divs to the main grid div
+             divEle.className = "col col-lg-3";
+             divEle.appendChild(courseNameDiv);
+             divEle.appendChild(img);
+             divEle.appendChild(document.createElement("br"));
+             divEle.appendChild(likesimage);
+             divEle.appendChild(likesNumber);
+             divEle.appendChild(deleteIcon);
+             divEle.appendChild(duration);
+             rowElement.appendChild(divEle);
+         }
+     }
+
+    </script>
+
+
+</body>
+</html>
