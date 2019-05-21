@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="Promise.js"></script>
+    <script>
+    var aPromise = GetPostData();
+    aPromise.then(
+        (responseFromResolve)=>{console.log(responseFromResolve); console.log("First then")}
+        ,(errorFromReject)=>{console.log(errorFromReject); throw new Error("This is reject error first then\n");})
+        .then(
+            (dataAsJS)=>console.log("Success: this is second then"), // THis is called , if either of the above promises success
+            (err)=>{console.log(err + "this is second then\n"); throw new Error("Go to catch block"); } //this is called if either of the above promises fails
+           ).catch(function(){
+               console.log("It is a catch");
+           })
+
+
+
+
+       console.log("program Ended!!!"); //This prints first because of async call above code.
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

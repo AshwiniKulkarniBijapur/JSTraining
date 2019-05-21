@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modular Patern</title>
+    <script>
+      var MathModule = (function(){
+            function Add(x,y){
+                return x +y;
+            }
+
+            function Multiply(x,y){
+                return x * y;
+            }
+            function Divide(x, y){
+                return x / y ;
+            }
+
+            return{    // only methods returned here are available for outside IIfe to be used.
+                Addition: Add,
+                Multiply: Multiply
+            }
+      })();
+
+      var sum = MathModule.Addition(2,4);
+      var sum2 = MathModule.Multiply(3,6);
+//-----------------------------------Another variant: Augmenting Moduler pattern------------------------------
+
+      var ExistingObject1 = {PI:Math.PI} // Jquery augments the fucnctionalitie sot thw window object. BEst example
+      var ExistingObject2 ={PI:Math.PI}
+
+      var NewExistingObj =  (function(eObj){
+          eObj.Add = function(x,y){
+              return x+y;
+          }
+          eObj.Multiply = function(x,y){
+              return x*y;
+          }
+          return eObj;
+      })(ExistingObject);
+      
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

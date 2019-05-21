@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Observer Pattern</title>
+    <script>
+        function BirthdayPartyEvent(){ // Angular and React frameworks use the observer Pattern
+            this.guestList =[];
+
+        }
+
+        BirthdayPartyEvent.prototype = {
+            subscribe:function(fn){
+                this.guestList.push(fn);
+            },
+            unsubscribe:function(fn){
+                this.guestList = this.guestList.filter(function(item){ //remove the item ..item is every function handler in the guest array
+                    if(item!= fn){
+                        return item;
+                    }
+                })
+            },
+            execute:function(eventDetails){
+                this.guestList.forEach(function(item){
+                    item(eventDetails);
+                })
+            }
+        }
+        function GuestHandler(){
+            console.log("Welcome guest");
+        }
+
+        function specialGuestHandler(){
+            console.log("Welcome drinks for guests ");
+        }
+        var partyPerson = new BirthdayPartyEvent();
+        partyPerson.subscribe(GuestHandler);
+        partyPerson.subscribe(specialGuestHandler);
+        partyPerson.execute("MyBirthday Party");
+       
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

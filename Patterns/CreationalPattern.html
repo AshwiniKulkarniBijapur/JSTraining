@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Creational pattern</title>
+    <script>
+         var person = {name: "Virat", city: "Delhi"}; //singleton
+
+         //IIFE
+
+         var singletonPerson = (function(){
+             return {name: "Virat", city: "Delhi"};
+         })();
+
+         var anotherSingletonPerson = (function(){
+             var isInstanciated;
+
+             function Init(){
+                 return {name: "Virat", city: "Delhi"};
+             }
+
+             return {
+                 getInstance: function(){
+                     if(!isInstanciated){
+                         isInstanciated = Init();
+                     }
+                     return isInstanciated;
+                 }
+             }
+         })();
+
+         var theInstance = anotherSingletonPerson.getInstance();
+         var anotherInstance = anotherSingletonPerson.getInstance(); //Same refernce is returned
+
+         theInstance.name = "Sachin"; // Same refre
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
