@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    //  function Add(){
+    //      var num1 = document.getElementById("num1").value;
+    //      var num2 = document.getElementById("num2").value;
+        
+    //      var sum = parseInt(num1)+parseInt(num2);
+    //      var resultDiv = document.getElementById("result");
+    //      resultDiv.innerHTML = "<b>The sum of two numbers is :</b>"+sum;  // InnerHTML parses the html tags while innerText does not
+    //  }
+
+    function Add(){
+         var num1 = document.getElementById("num1").value;
+         var num2 = document.getElementById("num2").value;
+        
+         var sum = parseInt(num1)+parseInt(num2);
+         var resultPara = document.createElement("p");
+         resultPara.id = "result";
+         resultPara.innerHTML = "The sum of two numbers is :"+sum;
+
+         document.querySelector("body").appendChild(resultPara); // appends the dynamically created DOM element to the Existing DOM.
+     }
+    </script>
+</head>
+<body>
+   <label for="num1"> Num1: </label><input type= "text" id="num1"/>
+    <br/>
+    <label for="num2">Num2 :</label> <input type="text" id="num2"/>
+
+    <br/>
+
+    <input type="button" value="Add" onClick="Add();"/>
+    <br/>
+
+  
+</body>
+</html>

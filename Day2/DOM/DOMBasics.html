@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        .Even{
+            border: 2px solid red;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        #containerDiv{
+            border: 2px solid blue
+        }
+    </style>
+</head>
+<body>
+    <div id = "containerDiv" > 
+        Hello DOM!!!!
+    </div>
+
+    <div class= "Even">
+        second div
+    </div>
+    <div class= "Even">
+
+        Third div
+    </div>
+
+    <script>
+            document.write("Hello DOM");
+            var divElement = document.getElementById("containerDiv");
+            console.log(divElement.innerHTML);
+           // divElement.innerHTML =  "This is changed";
+            
+
+            var allDivs = document.getElementsByTagName("div")
+            for(var i =0; i<allDivs.length; i++)
+            {
+                console.log(allDivs[i].innerText);
+            }
+
+            var divWithClasses = document.getElementsByClassName("Even");
+            for(var i =0; i<divWithClasses.length; i++)
+            {
+                console.log(divWithClasses[i].innerText);
+            }
+
+            // HTML5  // querySelector : added by HTML5
+
+            var divWithID =  document.querySelector("#containerDiv"); // returns single element.fisrt match
+            console.log(divWithID.innerHTML);
+
+            var divWithClass = document.querySelectorAll(".Even"); // return a array of all elements with the class Even
+            console.log(divWithClass.length);
+    </script>
+</body>
+</html>

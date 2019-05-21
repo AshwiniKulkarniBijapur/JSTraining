@@ -1,0 +1,132 @@
+<!DOCTYPE html>;
+<html lang = 'en'>
+<head>
+<title>More on objects</title>
+<script>
+
+//  var player = {name: "Sachin", city: "Mnmbai", address: {HouseNo: "101", street: "MGRoad"}};
+
+//  //Every object can be accessed as an array in JS
+
+//  console.log(player.name);
+//  console.log(player["name"]);  // This is associative array syntax for object
+//  console.log(player["address"]["street"]);
+
+//  for(var prop in player){
+//      console.log(prop +":"+ player[prop]); // For in loop refers to the property of the object if used for object
+//                                            //(in case of arrays, it refers to index)
+//  }
+
+
+
+/* By default the enumerable and writabale are false. can be  set to false using defineProperty method 
+of the Object */
+var obj = {newProp: 100, speed: 100};
+Object.defineProperty(obj,'newProp',{value:200, writable: false, enumerable: true});
+//'speed', {value: 400,writable: false, enumerable: false}
+obj.newProp = 500;
+console.log(obj['newProp'])
+
+for(var prop in obj)
+{
+    console.log(prop+":"+obj[prop] + " associative array syntax");
+}
+
+
+/*  this keyword*/
+
+/* the  object is created, the async call is set aside and the constructior ends, so when the
+async call is made the object context is wiped out. The aysnc call is made on Window context*/
+
+// function Emp() {
+//     this.salary = 40000;
+//     var self = this // Closeure variable :varibales of outer functions are avaible for the inner functions inn case of async calls
+//     setTimeout(function(){
+//         console.log(self.salary + " retaining 'this' context using closure var");
+//     },2000);
+// }
+
+// var e = new Emp();
+
+
+
+/* literal syntax*/
+var company = {name: "Mathworks",
+               city: "Pune",
+			   isMNC: true,
+			   address: {
+			    block: "B wing",
+				floor: "9th floor",
+				city: "Bengaluru",
+                fullAddr:  function(){
+                    return this.block+","+this.floor+","+this.city
+                }
+			   },
+			   getDetails: function(){
+			     console.log("the company "+this.name+" is in "+ this.address.fullAddr());
+			   }
+			   };
+			   
+			   company.getDetails();
+
+     /* 'this' keyword is always called on a  context and not in initialization code */          
+
+
+     /* Contextual methods*/
+
+     //Call, bind and apply
+
+
+     var person = {name: "Ashwini",
+                      getDetails: function(message, message2){
+                          console.log(message + this.name + message2);
+                      }}
+                      person.getDetails("Hi", "where are u?");
+
+     var person2 = {name: "Amit"}
+     person.getDetails.call(person2, "Good morning ", "are u ready?");
+
+     /*  'call'  method is used to change the context of the method being called. In above example, getDetails() is called
+     on the person2 instead of person.
+     */
+     /* 'apply is almost same', the parameters list is accepted as array*/
+
+     person.getDetails.apply(person2, ["Good morning ", "how are u?"]);
+    
+    /* only context is binded, not a call  is made immediately in case of 'bind'*/
+
+   var theFuncBindedWithContext =  person.getDetails.bind(person2, 'Hi', "the context is binded to be called later");
+
+   // some 200 lines of code.
+   theFuncBindedWithContext();
+
+   /* use of bind: use this way instaed of protoptyping for inheritence */ 
+   function Car(name, speed){
+       this.name = name || "Fiat";
+       this.speed = speed || 200;
+   }
+
+   function JamesBondCar(fly){
+     Car.apply(this, ["BMW", 400]);
+     this.canFly = fly;
+
+   }
+
+   var jbc = new JamesBondCar(true);
+
+   /*'with' keyword */
+   var area ;
+   var sqrtt;
+   with(Math){
+       area = PI * 10 *10;
+       sqrtt = sqrt(25);
+   }
+
+  
+
+
+
+
+</script>
+</head>
+</html>

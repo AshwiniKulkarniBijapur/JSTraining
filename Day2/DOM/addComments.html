@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet"/>
+</head>
+<body class="container text-center"> 
+    Please enter a comment: <input type="text" id="comment"/>
+    <input type="button" id="Add" value="Add comment" onclick="addComment()" class="btn btn-primary"/>
+    <br><br/>
+    List of Comments: <ul id="myComments"></ul>
+
+    <script>
+
+       var list = document.getElementById("myComments"); // Event delegation. event fires on an element which is handled by the parent element
+                                                         // the event object traverses from child - parent: bubbling
+       function removeElement(){
+           console.log(event.target);
+           if(event.target.nodeName =="SPAN"){
+            list.removeChild(event.target.parentNode)
+           }
+          
+       }
+
+       function addComment(){
+            var comment = document.getElementById("comment").value;
+            var addbtn = document.getElementById("Add");
+            var listParent = document.getElementById("myComments");
+
+            //create  li element
+            var liObj = document.createElement("li");
+            liObj.innerText = comment;
+           
+
+            //create trash icon
+            var spanEle = document.createElement("span");
+            spanEle.className = "glyphicon glyphicon-trash";
+
+            //Add to li 
+            liObj.appendChild(spanEle);
+            liObj.addEventListener("click", removeElement);
+
+            //Add to ui
+            listParent.appendChild(liObj);
+
+
+       }
+    </script>
+</body>
+</html>

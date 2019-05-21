@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Input types</title>
+</head>
+<script>
+        
+// function onloadHandler(){
+//         var txt = document.querySelector("input");
+//         txt.value = "Ashwini";
+        
+//  }
+
+ function clickHandler(){
+        var txt = document.querySelector("input");
+        var paraElement = document.getElementById("result");
+        paraElement.innerText = "The result is "+txt.value;
+        
+ }
+</script>
+<!-- <body onload = "onloadHandler()"> -->
+    <body>
+    Username: <input type="text" value="Username"/>
+    <input type="button" value="Submit" onClick= "clickHandler();"/>
+
+    <p id="result"></p>
+</body>
+
+</html>

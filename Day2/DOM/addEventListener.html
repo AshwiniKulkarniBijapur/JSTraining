@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="clickMe" id="target">
+    <input type="button" value="Add" id="AddHandler" onclick="addHandler()"/>
+    <input type="button" value="Remove" id="RemoveHandler" onclick="removeHandler()"/>
+
+    <script>
+        var btn = document.getElementById("target");
+        function targetHandler(){
+            alert("invoked");
+        }
+
+        function addHandler(){
+            
+            btn.addEventListener("click", targetHandler); // use a named function and not a anonymous function
+        }
+
+        function removeHandler(){
+             btn.removeEventListener("click", targetHandler); // dynamically adding /removing the event listners
+        }
+    </script>
+</body>
+</html>
