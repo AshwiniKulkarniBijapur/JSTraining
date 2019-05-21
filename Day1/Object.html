@@ -1,0 +1,74 @@
+<!DOCTYPE html>;
+<html lang = 'en'>
+<head>
+<title>Objects</title>
+<script>
+/* literal syntax*/
+var company = {name: "Mathworks",
+               city: "Pune",
+			   isMNC: true,
+			   address: {
+			    block: "B wing",
+				floor: "9th",
+				city: "Bengaluru"
+			   },
+			   getDetails: function(){
+			     console.log("the company "+this.name+" is in "+ this.city);
+			   }
+			   };
+			   
+			   company.getDetails();
+			   
+    /* Object Constructor */
+
+    var obj = new Object();
+    obj.name = "Ashwini";
+	obj.city = "Bangalore";
+	
+	console.log(obj);
+	
+	/* Constructor syntax */
+	
+	function Car(name, color){ // "this" keyword makes the function as constructor.
+	
+	   this.name = name || "punto"
+	   this.color = color || "Wine red";
+	   this.details = function(){
+	                  console.log("Car is "+ this.name+ "  with the color " + this.color);
+	                  }
+	}
+	
+	var carObj = new Car("Ertiga", "Grey");
+	carObj.details();
+	var carObj1 = new Car();
+	carObj1.details();
+	
+	//"this" keyword used outside the constructor refers to the Window object.
+	
+	function JamesBondCar()
+	{
+	   this.canFly  = true;
+	   this.useNitro = true;
+	   this.name = "jbcname";
+	}
+	
+	JamesBondCar.prototype = new Car();
+	JamesBondCar.prototype.price = 400000;
+	
+	var jbc = new JamesBondCar();
+	
+	console.log(jbc instanceof JamesBondCar);
+	console.log(jbc instanceof Car);
+	
+	console.log(jbc.isPrototypeOf(JamesBondCar));
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</head>
+</html>

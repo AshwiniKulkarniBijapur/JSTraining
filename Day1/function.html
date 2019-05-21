@@ -1,0 +1,151 @@
+<!DOCTYPE html>;
+<html lang = 'en'>
+<head>
+<title>Function</title>
+<script>
+  funcDeclare();
+
+ function funcDeclare() // this gets hosited
+ {
+     console.log("in func declare");
+ }
+  //funAsExp();  // not hoisted
+ var funAsExp = function(){  //this syntax does not get hoisted? anonymous function
+   console.log("Func as exp method");
+ }
+ funAsExp();
+ 
+ console.log(typeof funAsExp); //type is function
+ 
+ //Using  a function object // not recommended for use
+ var useFuncType = new Function("x","y","return x+y");
+ 
+ console.log(useFuncType(10,8569));
+ 
+ //IIFE: Immediate Invocanble Function expression/ to be called only once
+ 
+ //E.g : page loads functions
+ 
+ var result = (function(x,y){  // IIFE function declared and called at the same time(only once)
+   console.log("Initialization code is here");
+ })(37,46);
+ 
+ 
+ //The parameters in JS are optional
+ 
+ function add(x,y){ // Functions are not mandatory
+   x = x || 10;
+   y = y || 30;
+   return x+y;
+ }
+ 
+ console.log(add(0,789));  //null, zero, undefined  and emprt string are falsy values
+ 
+ 
+ var name = "Baggins";
+
+(function () {
+    // Outputs: "Original name was undefined"
+    console.log("Original name was " + name);
+
+    var name = "Underhill";
+
+    // Outputs: "New name is Underhill"
+    console.log("New name is " + name);
+})();
+
+
+//recursion factorial
+
+
+function factorial(x)
+{
+   if(x<=1)  
+     return 1 ;
+	 else
+	  return x*factorial(x-1);
+	  
+	
+}
+ console.log(factorial(5))  ;
+ 
+ // inner functions
+ 
+ function hypotenuse(l,b){
+ 
+    function sqaure(x) // not accessible outside the parent function
+	{
+	   return x*x;
+	}
+ 
+     return Math.sqrt(sqaure(l) + sqaure(b));
+ }
+ 
+ console.log(hypotenuse(10,20));
+ 
+ 
+ //call back function  Async functions
+ console.log("Calling set timeout");
+ setTimeout(function(){
+	console.log("1:Called after 2 seconds");
+ }, 2000);  //Finishes the current execution and then calls the async callback
+ 
+  setTimeout(function(){ // time is min wait time before the method is executed. Not mandatory to execute in that t
+	console.log("2: Called after 2 seconds");
+ }, 2000);  
+ 
+ console.log("Program ended");
+ 
+ 
+ //setInterval(function(){
+//  console.log("Called after evert second");
+ //},500);
+ 
+ 
+ /* Function that return a function */
+ 
+ function outer(){
+ var x =10; // x is a closeure variable
+  console.log("outer function called : Closure");
+   return function(){
+   console.log(x);
+     console.log("Inner function called");
+   }
+ }
+ 
+ var Inner = outer(); // Outer function finished execution.
+ Inner();
+ 
+// outer()(); // Function currying
+ 
+ 
+ //Closure variable: inner functions can use these variables even though parents function call stack is cleared.
+ 
+ // call stacks of the nested functions are always retained until browser is closed. Used for counters.Closure 
+ //variables are the reason for the memory leaks.
+ 
+ 
+ function Counter(){
+ var x = 0;
+ setInterval(function(){
+    console.log(++x);
+	console.log(--x);
+ },1000)
+ }
+ 
+ 
+ //Counter();
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</script>
+</head>
+</html>

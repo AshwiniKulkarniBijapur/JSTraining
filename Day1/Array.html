@@ -1,0 +1,35 @@
+<!DOCTYPE html>;
+<html lang = 'en'>
+<head>
+<title>Array</title>
+<script>
+ var cars = ["BMW", "AUDI", "Mercedes"];
+ 
+ var moreCars = new Array("FIAT","TATA"); // Array objects
+ 
+ var emptyArray = new Array(4);
+ for(var c in emptyArray)
+ {
+    console.log("empty array"+c); // for-in loop spits out the only indexes
+ }
+ 
+ cars.forEach(function(theCar){ // This is  a sync loop
+     console.log(theCar);
+ })
+ 
+ console.log("Program ended")
+ 
+ for(var c in cars)
+ {
+    console.log(c); // for-in loop spits out the only indexes
+ }
+ 
+ cars.push("Bentley");
+  console.log("all cars:   "+cars);
+ //ES6 feature
+ for(var c of cars){
+   console.log(c); // this displays the objects/elements
+ }
+</script>
+</head>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>;
+<html lang = 'en'>
+<head>
+<title>Document</title>
+<script src = "externalJS.js"></script>
+<script src = "Calculator.js"></script>
+<script>
+'use strict';
+ var message = "Hello World!";
+ var message = {};
+ console.log(typeof message);
+// x  = 10; // var created with var keyword
+ 
+ function Test(){
+     funcScope = 100;
+ }
+ 
+ /* Operators */
+ 
+ var str1 = "Mathworks";
+ var str2 = "Mathworks";
+ 
+ console.log(str1 == str2)
+ 
+ var num1 = 10;
+ var num2 = "";
+ var num3 = 20;
+ 
+ console.log(num1 === num2) // Checks both the value and the type of the variable.
+ 
+ console.log(num1+num2+num3); // When string is there, whole expression is treated as String only for addition
+ console.log(num1-num2-num3); 
+ 
+ /* Logical operators */
+ 
+ var y;  //default valus is undefined and is false
+ console.log( y || null)
+ 
+ var z = null; //null and undefined are not same.
+ 
+ console.log(10 + y);
+ 
+ /* ternary operators*/
+ 
+ console.log((num1 === num2)? "Equal" : "Not Equal");
+ 
+ console.log("hfdj" - 20); // NaN  not a number
+ console.log(isNaN("hfdj" - 20));
+ 
+ 
+ var num2Numeric =  parseInt(num2); // Input should be convertible format. 
+ console.log(num2Numeric);
+ console.log(typeof num2Numeric);
+ 
+ var v = +num2;
+ console.log(v);
+ console.log(typeof v);
+ 
+ console.log(add(10,30)); // add method from the external file.
+ 
+ 
+</script>
+
+</head>
+</html>
