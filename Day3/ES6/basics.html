@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6 basics</title>
+    <script>
+      //----------------------1. blocked scoped variables// let keyword creates block scoped variables. let does not hoist the variable
+        // not allowed to create variable with same name in same scope.
+      if(true){
+          let x =10;
+          if(true){
+             let x = 300;
+             console.log(x); // 300 displays
+          }
+          if(true){
+              console.log(x); // 10 displays
+          }
+      }
+      //console.log(x); // this displays reference error as x is not available outside the block
+
+       var a =1;   // This is accesible on window
+       let b =3;  // let variables can be accessed using window object
+
+       //-------------------2. const: allows you to define a constant
+
+       const PI = 3.14; // declaration and initialization must be in the same line for const
+      // PI = 3.14; // not allowed to reassign the value for const
+
+
+    //----------------3 > Destructuring array and objects
+
+    var cars = ["BMW","FIAT","AUDI","HYUNDAI"];
+    //[car1,car2,car3] = cars; // no need of indexing, this does not create an array .Only three variables 
+    [car1,,car3,,car5,car6="TATA"] = cars; //s set default value in case if no value available.
+
+
+    //With objects
+
+    let company = {name: "MathWorks", city: "Bangalore"};
+    let {name,city} = company; //Name of the properties in the object and the local variables should match.
+    let {Name,City} =company; // returns undefined . case sensitive name matching
+
+
+    //-----------------------4. Spread operator three dots. Join two arrays . ALso works for objects
+
+    var moreCars = ["TATA", "MERCEDES","JEEP"];
+    var someMoreCars =["FERRARI", "BENTELEY"];
+
+    var allCars = [...cars,...moreCars,...someMoreCars];  //this is deep copy.
+
+    /* For objects */
+    let person = {name:"Sachin", city:"Mumbai"};
+    let player = {...person,runs:3000};
+    person.name = "Dhoni"; // Does not change the value in player.(Deep copy)
+
+
+    //--------------------------5. functions
+       // default parameters for ES5
+        function PrintBooks(author, title){
+                author = author || "Unknown";
+                title = title || "Unknown";
+        }
+
+        //ES6 way . can be defined in function definitions
+        function PrintBooksES6(author="Unknown", title = "Unknown"){
+            console.log(author, title);
+
+        }
+
+        PrintBooksES6("Ashwini", "My Story");
+
+        //--------------------Rest (Remaining) parameters  varargs
+
+
+        function PrintBooksVarArgs(author,...titles){ // three dots is var args. comma separated list is passed in to the function as an array
+            console.log(author, titles);
+
+        }
+
+        PrintBooksVarArgs("Ashwini", "My Story","Harry Potter 1"); //var args
+
+
+        //----------------------6. Arrow Functions: 
+          //Any anonymous function can be representaed as arrow fucntion. parameter list that goes to function  body. 'function' keyword is not used
+
+          var sqaure1 = function(x){
+              return x*x;
+          }
+
+          var square2 = (x) =>{ // This is arrow function
+              return x * x;
+          }
+          
+          var square3 = x => x*x // This is for single argument. return is optional
+
+          //Arrow functions cannot be used as constructor. They do not have implicit 'this'
+          // context is binded at the time of creattion and not at the time of invocation.
+
+          function Emp(){
+              this.salary = 5000;
+              setTimeout(()=>{
+                console.log(this.salary);
+              },2000)
+          }
+
+          //var emp1 = new Emp();
+
+          //-------------------7. Classes in ES6
+          // * no virtual functions, no overriding.
+          //* classes are not hoisted. Cannot create an instance of a class before defining it.
+
+          class Car{
+              constructor(name="Punto", speed=200){
+                  this.name = name;
+                  this.speed = speed;
+              }
+
+              Accelerate(){ // no function keyword
+                //console.log("the car is running at "+this.name+" "+this.speed+"kmph");
+                console.log(`the car is running at ${this.name} ${this.speed} kmph`); // template literal enclosed in backticks(``) 
+              }
+          };
+
+          var carObj = new Car("Ertiga", 40);
+          carObj.Accelerate();
+          console.log(carObj.name);
+          
+          class JamesBondCar extends Car{ // Inherittence in ES6
+
+            constructor(name, speed, canFly){
+                super(name,speed); // Call the super class contructor 
+                this.canFly = canFly;
+            }
+
+            Accelerate(){ // overriding the base class method with the same method name.
+                
+                console.log(" in the James Bond car"); 
+                super.Accelerate();
+              }
+          }
+            
+          const jbc = new JamesBondCar("Sumo",50,true); // const in case of object makes the reference as const and not the actual value of the object
+          var xyz = new JamesBondCar("Sumo",50,false);
+          //jbc = xyz; // this erros ou as jbc is a const value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+      
+     
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX</title>
+
+    <script>
+     
+     function submitHandler(){
+         //submits the page and refreshes.
+         //event.preventDefault(); // this prevents the default action of the event.
+     }
+
+     function clickHandler(){
+         event.preventDefault();
+     }
+    </script>
+
+</head>
+<body>
+    <form onsubmit="submitHandler()">
+            <input type="button" value="Get Data!"/>
+            
+            <a href ="https://google.com" onclick="clickHandler()">Go to google</a>
+
+            <!-- submit is by default syncronous -->
+            <input type="submit" value="Submit"/>
+            <!-- this is submit button by default -->
+
+            <button> Getme </button> 
+    </form>
+    
+</body>
+</html>

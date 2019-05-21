@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX</title>
+    <script>
+        var JSArray;
+    
+      function clickHandler(){
+        //  if(window.XMLHttpRequest){ // check for the browser support. not supported in older IEs
+
+        //  }
+        //  else if(window.ActiveXObject){  }// IE 5 older browser}
+
+        /* Create a request object*/
+         var XMLHttpObj = new XMLHttpRequest(); // this is given by window object not by JS. this makes a  request ajax
+
+         /* Configure the object*/
+         XMLHttpObj.open("GET","https://jsonplaceholder.typicode.com/posts"); 
+
+         /* xml send*/
+         XMLHttpObj.send();
+         XMLHttpObj.onreadystatechange =  function(){ // readyState gives state of async call (1-4) numeric states for the values. refer MDN for more details
+            if(XMLHttpObj.readyState == 4 && XMLHttpObj.status == 200){
+                // update the UI
+             
+                JSArray = JSON.parse(XMLHttpObj.responseText);
+                showTitle();
+            }
+         }
+
+     }
+
+     function showTitle(){
+        var ulEle = document.getElementById("titles");
+
+        for(var item of JSArray){
+            var liEle = document.createElement("li");
+            liEle.innerHTML = item.title;
+            ulEle.appendChild(liEle);
+        }
+     }
+
+    </script>
+</head>
+<body>
+        <input type="button" value="Get Data!" onclick="clickHandler()"/>
+        
+        <div >
+             <h3>All Titles:</h3>   <ul id="titles"/>
+        </div>
+        
+</body>
+</html>

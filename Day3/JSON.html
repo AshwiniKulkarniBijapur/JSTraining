@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON</title>
+    <script>
+      var person = {
+          name: "Sachin",
+          City: "Mumbai",
+          stats: {
+              runs: 3000,
+              avg: 65,
+              desc: "Opening Batsman",
+              wickets: 100
+          },
+          getDetails: function(){
+              console.log("this is  a function");  // Functions are converted to JSON as they do not constitute as Data to be shared.
+          }
+
+      };
+
+      console.log(JSON.stringify(person)); // stringify converts the JS object to JSON object(request format)
+      var personJSON = JSON.stringify(person);
+
+      var JSobj = JSON.parse(personJSON); // converts JSON to js object to be shown in browser
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
